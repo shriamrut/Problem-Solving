@@ -1,3 +1,9 @@
+/* Sum in Range from [l,r] for multiple queries
+   Time Complexity for Fenwick Tree:
+   build: O(nlog(n))
+   query: log(n)
+   update: log(n)
+*/
 #include <bits/stdc++.h>
 #define pb push_back
 using namespace std;
