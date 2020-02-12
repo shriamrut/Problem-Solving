@@ -1,3 +1,10 @@
+/*
+Problem: Minimum Element in Range [l,r] with multiple queries
+Time Complexity for Segment Tree:
+    Query: O(log(n))
+    Update: O(log(n))
+    Build: O(nlog(n))
+*/
 #include <bits/stdc++.h>
 #define pb push_back
 using namespace std;
