@@ -1,3 +1,9 @@
+/*
+Tries Data Structure
+Used for checking if a certain prefix exist in a set of strings or to print the set of strings with a certain prefix.
+Time Complexity:
+search: O(|t|) where t is length of the prefix
+*/
 #include <bits/stdc++.h>
 #define asize 26
 #define pb push_back
