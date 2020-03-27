@@ -1,3 +1,7 @@
+/*
+KMP or Knuth Morris Pratt Algorithm 
+Time Complexity= O(m+n) , where m is the length of text and n is the length of the pattern 
+*/
 #include <bits/stdc++.h>
 using namespace std;
 void generatelps(vector<int>&lps,string &pattern) {
