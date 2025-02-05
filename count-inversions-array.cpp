@@ -78,26 +78,19 @@ class Solution {
     	int N = (end - beg) + 1;
     	vector<int> res(N);
     	int i = beg, j = mid + 1, k = 0;
-    	cout << "Before merging\n";
-    	printv(arr, beg, mid);
-    	printv(arr, mid + 1, end);
     	while(i <= mid && j <= end) {
     		if(arr[i] <= arr[j]) {
     			res[k] = arr[i];
     			i++;
     		}
     		else {
-    			count++;
+    			count += (mid - i) + 1;
     			res[k] = arr[j];
     			j++;
     		}
     		k++;
     	}
     	while(i <= mid) {
-    		/*
-    		int t = ((mid + 1) - end) + 1;
-    		cout << arr[i] << " is present, Incrementing count by " << t << "\n"; 
-    		count += t;*/
     		res[k] = arr[i];
     		k++;
     		i++;
