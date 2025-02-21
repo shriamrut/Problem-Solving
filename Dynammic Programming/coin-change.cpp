@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 bool assertEquals(int a, int b) {
 	if(a == b) {
 		cout << "(" << a << " == " << b << ")" << " - PASS \n";
@@ -12,8 +13,24 @@ bool assertEquals(int a, int b) {
 	}
 }
 
+
 class Solution {
 public:
+
+	int coinChangeTableSpaceOptimizedV2(vector<int> &coins, int amount) {
+		vector<int> dp(amount + 1, INT_MAX);
+		dp[0] = 0;
+		for(int i = 1; i <= amount; i++) {
+			for(int j = 0; j < coins.size(); j++) {
+				if(i >= coins[j] && dp[i - coins[j]] != INT_MAX) {
+					dp[i] = min(dp[i], dp[i - coins[j]] + 1);
+				}
+			}
+		}
+		int result = dp[amount];
+		return (result == INT_MAX)? -1: result;
+	}
+
 	int coinChangeTableSpaceOptimized(vector<int>& coins, int amount) {
 		int n = coins.size();
 		vector<int> prev(amount + 1, INT_MAX);
@@ -71,6 +88,29 @@ public:
         int result = dp[n][amount];
         return (result == INT_MAX)? -1: result;
     }
+
+    int coinChangeMemoSpaceOptimized(vector<int> &coins, int amount) {
+    	vector<int> memo(amount + 1, -1);
+    	int result = coinChangeMemoSpaceOptimized(coins, memo, amount);
+    	return (result == INT_MAX)? -1: result;
+    }
+
+    int coinChangeMemoSpaceOptimized(vector<int> &coins, vector<int> &memo, int amount) {
+    	if (amount == 0) return 0;
+        if (amount < 0) return INT_MAX;
+
+        if (memo[amount] != -1) return memo[amount];
+
+        int result = INT_MAX;
+        for (int coin : coins) {
+            int subResult = coinChangeMemoSpaceOptimized(coins, memo, amount - coin);
+            if (subResult != INT_MAX) {
+                result = min(result, subResult + 1);
+            }
+        }
+        memo[amount] = result;
+        return result;
+    } 
 
 	int coinChangeMemo(vector<int>& coins, int amount) {
         vector<vector<int>> memo(coins.size(), vector<int> (amount + 1, -1));
@@ -140,7 +180,6 @@ void printv(vector<int> &elements) {
 	}
 	cout << "]\n";
 }
-
 int main() {
 	#ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
@@ -158,7 +197,7 @@ int main() {
 		// cout << amount << "\n";
 		// printv(coins);
 		Solution s;
-		assertEquals(s.coinChangeTableSpaceOptimized(coins, amount), s.coinChangeTable(coins, amount));
+		assertEquals(s.coinChangeTableSpaceOptimized(coins, amount), s.coinChangeTableSpaceOptimizedV2(coins, amount));
 	}
 	return 0;
 }
