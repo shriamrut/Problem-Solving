@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 bool assertEquals(int a, int b) {
 	if(a == b) {
 		cout << "(" << a << " == " << b << ")" << " - PASS \n";
@@ -13,10 +12,8 @@ bool assertEquals(int a, int b) {
 	}
 }
 
-
 class Solution {
 public:
-
 	int coinChangeTableSpaceOptimized(vector<int>& coins, int amount) {
 		int n = coins.size();
 		vector<int> prev(amount + 1, INT_MAX);
@@ -143,6 +140,7 @@ void printv(vector<int> &elements) {
 	}
 	cout << "]\n";
 }
+
 int main() {
 	#ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
