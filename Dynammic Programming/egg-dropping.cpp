@@ -38,7 +38,32 @@ class Solution {
     // Function to find minimum number of attempts needed in
     // order to find the critical floor.
 
-    int eggDrop(int n, int k) {
+    int eggDropTableSpaceOptimized2(int n, int k) {
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
+        int m = 0;
+        while(curr[n] < k) {
+            m++;
+            for(int x = 1; x <= n; x++) {
+                curr[x] = 1 + prev[x - 1] + prev[x];
+            }
+            prev = curr;
+        }
+        return m;
+    }
+    int eggDropTableSpaceOptimized(int n, int k) {
+        // moves, n eggs -> floors
+        vector< vector<int> > dp(k + 1, vector<int> (n + 1, 0));
+        int m = 0;
+        while(dp[m][n] < k) {
+            m++;
+            for(int x = 1; x <= n; x++) {
+                dp[m][x] = 1 + dp[m-1][x-1] + dp[m-1][x];
+            }
+        }
+        return m;
+    }
+
+    int eggDropTable(int n, int k) {
 
         vector<vector<int>> dp(n + 1, vector<int> (k + 1));
         for(int f = 1; f <= k; f++) {
@@ -63,6 +88,56 @@ class Solution {
         return dp[n][k];
     }
 
+    int eggDropMemo(int n, int k) {
+        vector< vector<int> > memo(n + 1, vector<int> (k + 1, -1));
+        return eggDropMemo(memo, n, k);
+    }
+
+    int eggDropMemo(vector< vector<int> > &memo, int n, int k) {
+        if(k == 0) {
+            return 0;
+        }
+        else if(n == 0) {
+            return INT_MAX;
+        }
+        else if(memo[n][k] != -1) {
+            return memo[n][k];
+        }
+        else {
+            int result = INT_MAX;
+            for(int f = 1; f <= k; f++) {
+                int moves = max(eggDropMemo(memo, n - 1, f - 1), eggDropMemo(memo, n, k - f));
+                if(moves != INT_MAX) {
+                    moves++;
+                }
+                result = min(moves, result);
+            }
+            memo[n][k] = result;
+            return result;
+        }
+    }
+
+    int eggDropRecurse(int n, int k) {
+        // N - eggs, K floors
+        if(k == 0) {
+            return 0;
+        }
+        else if(n == 0) {
+            return INT_MAX;
+        }
+        else {
+            int result = INT_MAX;
+            for(int f = 1; f <= k; f++) {
+                // egg drops
+                int moves = max(eggDropRecurse(n - 1, f - 1), eggDropRecurse(n, k - f));
+                if(moves != INT_MAX) {
+                    moves++;
+                }
+                result = min(result, moves);
+            }
+            return result;
+        }
+    }
    
 };
 
@@ -88,7 +163,7 @@ int main() {
         int n, k;
         cin >> n >> k;
         Solution s;
-        cout << s.eggDrop(n, k) << "\n";
+        assertEquals(s.eggDropTableSpaceOptimized(n, k) ,s.eggDropTableSpaceOptimized2(n, k));
     }
     return 0;
 }
