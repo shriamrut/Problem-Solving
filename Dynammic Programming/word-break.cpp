@@ -24,9 +24,9 @@ public:
 
 	bool wordBreakMemo(string s, vector<string> &wordDict) {
 		unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
-        int i = 0;
-        vector<int> memo(s.length() + 1, -1);
-        return wordBreakMemo(s, memo, wordSet, i);
+        	int i = 0;
+        	vector<int> memo(s.length() + 1, -1);
+        	return wordBreakMemo(s, memo, wordSet, i);
 	}
 
 	bool wordBreakMemo(string &s, vector<int> &memo, unordered_set<string> &wordSet,
@@ -92,9 +92,9 @@ bool assertEquals(bool expected, bool actual) {
 
 int main() {
 	#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    //freopen("output.txt", "w", stdout);
-    #endif
+    	freopen("input.txt", "r", stdin);
+	    //freopen("output.txt", "w", stdout);
+   	 #endif
 
 	int t;
 	cin >> t;
