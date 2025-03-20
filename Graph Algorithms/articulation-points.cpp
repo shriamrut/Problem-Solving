@@ -45,9 +45,6 @@ public:
 				 low[u] = min(low[u], disc[v]);
 			}
 		}
-		// if(parent == -1 && children > 1) {
-		// 	//?????
-		// }
 
 	}
 	vector<int> getArticulationPoints(vector<vector<int>> &adj, 
