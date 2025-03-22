@@ -94,7 +94,7 @@ public:
 					vis, 
 					isAp);
 				low[u] = min(low[u], low[v]);
-				if(parent != -1 && low[v] > disc[u]) {
+				if(parent != -1 && low[v] >= disc[u]) {
 					isAp[u] = true;
 				}
 			}
