@@ -91,5 +91,18 @@ int main(int argc, char **argv)
     {
         cout << ce.first << " " << ce.second << "\n";
     }
+    string encodedString = "";
+    for(char &c: s) {
+        encodedString += charToEncoding[c];
+    }
+    cout << "===================================\n";
+    cout << "Encoded string: " << encodedString << "\n";
+    int size = s.length() * 8;
+    cout << "===================================\n";
+    cout << "Current size: " << size << " bits\n";
+    cout << "Compressed size: " << encodedString.length() << " bits\n"; // assume each character is one bit
+    double ratio =  1.0 - ((double) encodedString.length() / size);
+    cout << "===================================\n";
+    cout << "Compression achieved: " << ratio * 100 << "%\n";
     return 0;
 }
